@@ -3,8 +3,8 @@
 import { Group, useMantineColorScheme } from "@mantine/core";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import noBgBlack from "@/assets/noBgBlack.png"
+import { useEffect, useState } from "react";
 
 export default function ClientWrapper() {
     const { colorScheme, setColorScheme } = useMantineColorScheme();
@@ -14,7 +14,9 @@ export default function ClientWrapper() {
         setMounted(true);
     }, []);
 
-    if (!mounted) return null; // Avoid hydration mismatch
+    if (!mounted) {
+        return null; // Avoid hydration errors by rendering nothing until mounted
+    }
 
     return (
         <Group className="h-full px-md justify-between">

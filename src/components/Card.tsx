@@ -1,39 +1,50 @@
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
-import { StaticImageData } from 'next/image';
+"use client";
 
-interface propType {
-    src: StaticImageData
-    title: string,
-    badge: string,
-    description: string
-    btnText: string
+import { useRouter } from "next/navigation";
+import { Card, Image, Text, Badge, Group, Box } from "@mantine/core";
+
+interface PropType {
+    src: string;
+    title: string;
+    badge: string;
+    description: string;
+    showContinueReading?: boolean;
+    index?: number;
 }
 
-function CardComponent({ src, title, badge, description, btnText }: propType) {
-    console.log(src);
+function CardComponent({ src, title, badge, description, showContinueReading, index }: PropType) {
+    const router = useRouter();
+
+    const handleContinueReading = () => {
+        const newsData = { src, title, badge, description };
+        sessionStorage.setItem("newsData", JSON.stringify(newsData));
+        router.push(`/news/${index}`);
+    };
+
+
     return (
-        <Card shadow="sm" padding="lg" radius="md" withBorder className='w-[300px] h-[300px]'>
-            <Card.Section>
-                <Image
-                    src={src.src}
-                    height={160}
-                    alt="news image"
-                    className="dark:invert"
-                />
+        <Card shadow="sm" padding="lg" radius="md" withBorder className="w-[300px] flex flex-col">
+            {/* Image Section */}
+            <Card.Section className="h-[160px]">
+                <Image src={src} className="w-full h-full object-cover" alt="news image" />
             </Card.Section>
 
-            <Group justify="space-between" mt="md" mb="xs">
-                <Text fw={500}>{title}</Text>
+            {/* Title and Badge */}
+            <Group justify="space-between" mt="md">
+                <Text fw={500} className="truncate w-[200px]">{title}</Text>
                 <Badge color="pink">{badge}</Badge>
             </Group>
 
-            <Text size="sm" c="dimmed">
-                {description}
-            </Text>
+            {/* Description + Continue Reading */}
+            <Box className="flex flex-col flex-grow">
+                <Text size="sm" c="dimmed" className="min-h-[60px]">{description}</Text>
 
-            <Button color="blue" fullWidth mt="md" radius="md">
-                {btnText}
-            </Button>
+                {showContinueReading && (
+                    <Text size="sm" c="blue" className="cursor-pointer mt-2" onClick={handleContinueReading}>
+                        Continue Reading →
+                    </Text>
+                )}
+            </Box>
         </Card>
     );
 }
