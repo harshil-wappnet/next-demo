@@ -1,0 +1,15 @@
+/* Light Mode */
+[data-mantine-color-scheme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #000;
+  --btn-color: #007bff;
+  --task-bg: #f0f0f0;
+}
+
+/* Dark Mode */
+[data-mantine-color-scheme="dark"] {
+  --bg-color: #181818;
+  --text-color: #ffffff;
+  --btn-color: #454545;
+  --task-bg: #252525;
+}

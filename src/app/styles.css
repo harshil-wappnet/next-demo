@@ -1,0 +1,12 @@
+@import "../styles/variables.css";
+
+body {
+  background-color: var(--bg-color);
+  transition: all 0.3s ease-in-out;
+  font-family: sans-serif;
+  color: var(--text-color);
+}
+
+/* Header component starts */
+
+/* Header component ends */

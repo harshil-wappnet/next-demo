@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import {
+  AppShell,
+  AppShellHeader,
+  AppShellMain,
   ColorSchemeScript,
   createTheme,
   DEFAULT_THEME,
@@ -7,9 +10,10 @@ import {
   mergeMantineTheme,
 } from "@mantine/core";
 import localFont from "next/font/local";
-import Head from "next/head";
 import "./globals.css";
+import '../app/styles.css';
 import { breakpoints, colors } from "./theme";
+import Header from "@/components/Header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,6 +31,7 @@ export const metadata: Metadata = {
   description: "Next App Mantine Tailwind Template",
 };
 
+// Create Mantine theme
 const theme = mergeMantineTheme(
   DEFAULT_THEME,
   createTheme({
@@ -34,21 +39,24 @@ const theme = mergeMantineTheme(
     fontFamilyMonospace: geistMono.style.fontFamily,
     breakpoints,
     colors,
-  }),
+  })
 );
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
+      <head>
         <ColorSchemeScript />
-      </Head>
+      </head>
       <body className="antialiased">
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme} defaultColorScheme="light">
+          <AppShell header={{ height: 60 }} padding="md">
+            <AppShellHeader>
+              <Header /> {/* Client component for color theme switching */}
+            </AppShellHeader>
+            <AppShellMain>{children}</AppShellMain>
+          </AppShell>
+        </MantineProvider>
       </body>
     </html>
   );
