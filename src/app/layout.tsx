@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div style={{ display: "flex", flexGrow: 1, maxHeight: "calc(100vh - 120px)", overflowY: "auto" }} >
               <AppShellMain style={{ flex: 1 }}>{children}</AppShellMain>
               <AppShellAside width={{ base: 250, md: 300 }} p="md">
-                <div className="bg-gray-100 p-4 rounded-lg shadow">
+                <div className="ad-bg-color p-4 rounded-lg shadow">
                   <h3 className="text-lg font-semibold">Advertisement</h3>
                   <p>Place your ads here</p>
                 </div>

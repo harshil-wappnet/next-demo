@@ -15,10 +15,10 @@ export default function Home() {
 
 
   useEffect(() => {
-    const fetchNews = async (category) => {
+    const fetchNews = async (category: string) => {
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.NEXT_PUBLIC_NEWS_API}`
+          `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.NEXT_PUBLIC_NEWS_API}`, { cache: "force-cache" }
         );
         const data = await response.json();
         return data.articles.slice(7, 10) || [];
@@ -60,7 +60,7 @@ export default function Home() {
                 badge="Technology"
                 description={news.description}
                 showContinueReading={true}
-                index={index}
+                id={index}
               />
             ))}
           </div>
@@ -74,7 +74,7 @@ export default function Home() {
                 badge="Business"
                 description={news.description}
                 showContinueReading={true}
-                index={index}
+                id={index}
               />
             ))}
           </div>
@@ -88,7 +88,7 @@ export default function Home() {
                 badge="Sports"
                 description={news.description}
                 showContinueReading={true}
-                index={index}
+                id={index}
               />
             ))}
           </div>

@@ -9,5 +9,8 @@ body {
 }
 
 /* Header component starts */
-
+.ad-bg-color {
+  background-color: #f0f0f0;
+  color: #000;
+}
 /* Header component ends */
